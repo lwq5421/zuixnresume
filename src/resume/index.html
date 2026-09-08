@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>李文强 - 个人简历</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Microsoft Yahei", sans-serif;
+    }
+
+    body {
+      background: #0a0a12;
+      color: #d0d0e8;
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* 星空背景效果 */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        radial-gradient(2px 2px at 20px 30px, #6366f1, transparent),
+        radial-gradient(1px 1px at 60px 70px, #06b6d4, transparent),
+        radial-gradient(1.5px 1.5px at 120px 150px, #8b5cf6, transparent),
+        radial-gradient(1px 1px at 200px 100px, #6366f1, transparent),
+        radial-gradient(2px 2px at 300px 200px, #06b6d4, transparent);
+      background-size: 500px 500px;
+      opacity: 0.3;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      padding-top: 90px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 固定导航栏 */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+      background: rgba(10, 10, 18, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 600;
+      background: linear-gradient(90deg, #6366f1, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-list {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-list a {
+      color: #a0a0c0;
+      text-decoration: none;
+      font-size: 14px;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .nav-list a.active,
+    .nav-list a:hover {
+      color: #fff;
+      border-bottom: 2px solid #6366f1;
+    }
+
+    /* 回到顶部按钮 */
+    .back-top {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #06b6d4);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .back-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-top:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    /* 板块通用样式 */
+    .section {
+      margin-bottom: 70px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 40px;
+      background: linear-gradient(90deg, #60a5fa, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, #6366f1, #06b6d4);
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    /* 个人信息 - 四卡片布局 */
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .info-card {
+      background: rgba(18, 18, 31, 0.8);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 10px;
+      padding: 22px;
+      transition: all 0.3s ease;
+    }
+
+    .info-card:hover {
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
+      transform: translateY(-3px);
+    }
+
+    .info-card .icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .info-card h4 {
+      color: #fff;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .info-card p {
+      font-size: 12px;
+      color: #9090b0;
+      line-height: 1.5;
+    }
+
+    /* 教育背景 */
+    .edu-item {
+      background: rgba(18, 18, 31, 0.8);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 10px;
+      padding: 28px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .edu-item:hover {
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
+    }
+
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .edu-school {
+      font-size: 20px;
+      font-weight: 600;
+      color: #60a5fa;
+    }
+
+    .edu-time {
+      font-size: 13px;
+      color: #8b5cf6;
+      padding: 4px 10px;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 20px;
+    }
+
+    .edu-major {
+      font-size: 15px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .edu-desc {
+      font-size: 13px;
+      color: #a0a0c0;
+      margin-bottom: 15px;
+    }
+
+    .course-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .course-tag {
+      font-size: 12px;
+      padding: 5px 12px;
+      background: rgba(99, 102, 241, 0.15);
+      border-radius: 15px;
+      color: #c4b5fd;
+    }
+
+    /* 专业技能 */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: rgba(18, 18, 31, 0.8);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 10px;
+      padding: 25px;
+    }
+
+    .skill-card h4 {
+      color: #22d3ee;
+      font-size: 16px;
+      margin-bottom: 15px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(34, 211, 238, 0.2);
+    }
+
+    .skill-list {
+      list-style: none;
+    }
+
+    .skill-list li {
+      font-size: 14px;
+      color: #c0c0e0;
+      margin-bottom: 8px;
+      padding-left: 15px;
+      position: relative;
+    }
+
+    .skill-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #6366f1;
+    }
+
+    /* 项目经历 */
+    .project-item {
+      background: rgba(18, 18, 31, 0.8);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 10px;
+      padding: 28px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .project-item:hover {
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .project-name {
+      font-size: 19px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .project-tech {
+      font-size: 13px;
+      color: #22d3ee;
+    }
+
+    .project-time {
+      font-size: 13px;
+      color: #8b5cf6;
+      margin-bottom: 15px;
+    }
+
+    .project-desc {
+      list-style: none;
+    }
+
+    .project-desc li {
+      font-size: 14px;
+      color: #b0b0d0;
+      margin-bottom: 10px;
+      padding-left: 18px;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    .project-desc li::before {
+      content: "-";
+      position: absolute;
+      left: 0;
+      color: #6366f1;
+    }
+
+    /* 获奖证书 */
+    .awards-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .award-item {
+      background: rgba(18, 18, 31, 0.8);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 10px;
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .award-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #06b6d4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .award-text h4 {
+      color: #fff;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .award-text p {
+      font-size: 12px;
+      color: #9090b0;
+    }
+
+    /* 页脚联系方式 */
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      border-top: 1px solid rgba(99, 102, 241, 0.2);
+      margin-top: 50px;
+      color: #8080a0;
+      font-size: 13px;
+    }
+
+    .contact-info {
+      margin-bottom: 10px;
+    }
+
+    .contact-info span {
+      margin: 0 10px;
+    }
+
+    /* 响应式适配 */
+    @media (max-width: 900px) {
+      .info-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .skills-grid,
+      .awards-list {
+        grid-template-columns: 1fr;
+      }
+      .nav-list {
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .info-cards {
+        grid-template-columns: 1fr;
+      }
+      .edu-header,
+      .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .nav-list {
+        display: none;
+      }
+      .back-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- 固定导航栏 -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">李文强</div>
+    <ul class="nav-list">
+      <li><a href="#info" class="active">个人信息</a></li>
+      <li><a href="#education">教育背景</a></li>
+      <li><a href="#skills">专业技能</a></li>
+      <li><a href="#project">项目经历</a></li>
+      <li><a href="#awards">获奖证书</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- 回到顶部按钮 -->
+<div class="back-top" id="backTop">↑</div>
+
+<div class="container">
+  <!-- 个人信息板块 -->
+  <section class="section" id="info">
+    <h2 class="section-title">个人信息</h2>
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="icon">💜</div>
+        <h4>性格特质</h4>
+        <p>性格开朗乐观，具备优秀的团队协作能力，逻辑思维清晰，善于沟通表达，能快速融入新环境。</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">⚙️</div>
+        <h4>技术方向</h4>
+        <p>深耕Java后端开发，熟悉企业级应用开发流程，兼顾Web前端与移动端开发，对技术保持高度热情。</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">📚</div>
+        <h4>学习履历</h4>
+        <p>专科阶段攻读移动应用开发专业，通过专升本升入西华师范大学计算机科学与技术专业，持续深耕。</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">💡</div>
+        <h4>办公能力</h4>
+        <p>熟练使用Word、Excel、PowerPoint等Office办公软件，具备文档撰写、数据整理与汇报演示能力。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 教育背景板块 -->
+  <section class="section" id="education">
+    <h2 class="section-title">教育背景</h2>
+
+    <div class="edu-item">
+      <div class="edu-header">
+        <div class="edu-school">西华师范大学</div>
+        <div class="edu-time">2026年09月 - 2028年06月（专升本）</div>
+      </div>
+      <div class="edu-major">计算机科学与技术专业 | 本科</div>
+      <div class="edu-desc">主修计算机系统与软件工程方向，深化算法设计与系统开发能力</div>
+      <div class="course-tags">
+        <span class="course-tag">数据结构与算法</span>
+        <span class="course-tag">计算机网络</span>
+        <span class="course-tag">操作系统</span>
+        <span class="course-tag">软件工程</span>
+        <span class="course-tag">数据库原理</span>
+        <span class="course-tag">Java高级开发</span>
+      </div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-header">
+        <div class="edu-school">成都工业职业技术学院</div>
+        <div class="edu-time">2023年09月 - 2026年06月</div>
+      </div>
+      <div class="edu-major">移动应用开发专业 | 专科</div>
+      <div class="edu-desc">GPA：3.55 / 专科期间荣获<strong style="color:#fbbf24;">国家励志奖学金</strong></div>
+      <div class="course-tags">
+        <span class="course-tag">企业级应用开发(Java/MVC/MySQL)</span>
+        <span class="course-tag">商业级开发(Java/Spring Boot/MySQL)</span>
+        <span class="course-tag">Android开发</span>
+        <span class="course-tag">数据库原理</span>
+        <span class="course-tag">数据结构与算法</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 专业技能板块 -->
+  <section class="section" id="skills">
+    <h2 class="section-title">专业技能</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h4>编程语言</h4>
+        <ul class="skill-list">
+          <li>Java（熟练掌握，面向对象编程）</li>
+          <li>Vue（熟练，前端页面开发）</li>
+          <li>Python（基础语法与脚本编写）</li>
+          <li>C语言（基础，具备算法编程能力）</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h4>框架工具</h4>
+        <ul class="skill-list">
+          <li>Spring Boot 企业级开发框架</li>
+          <li>MyBatis 持久层框架</li>
+          <li>Redis 缓存中间件</li>
+          <li>Git 版本控制与团队协作</li>
+          <li>Maven 项目构建工具</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h4>数据库</h4>
+        <ul class="skill-list">
+          <li>MySQL 关系型数据库设计与优化</li>
+          <li>SQLite 轻量级数据库开发</li>
+          <li>Redis 缓存设计与性能优化</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h4>其他能力</h4>
+        <ul class="skill-list">
+          <li>大学英语四级（CET-4）</li>
+          <li>Office 办公软件全家桶熟练应用</li>
+          <li>良好的文档编写与技术表达能力</li>
+          <li>较强的自主学习与问题排查能力</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 项目经历板块 -->
+  <section class="section" id="project">
+    <h2 class="section-title">项目经历</h2>
+
+    <!-- 项目1：智慧社区服务平台 -->
+    <div class="project-item">
+      <div class="project-header">
+        <div class="project-name">智慧社区服务平台（全栈开发）</div>
+        <div class="project-tech">Spring Boot / MyBatis / MySQL / Vue / 微信小程序</div>
+      </div>
+      <div class="project-time">2025.09 - 2026.01 | 校级课程实践项目</div>
+      <ul class="project-desc">
+        <li><strong>双端账号互通：</strong>实现居民、管理员双角色登录注册，基于JWT做身份鉴权，Web管理端与微信小程序端账号数据互通，同一账号可两端登录</li>
+        <li><strong>物业服务模块：</strong>开发社区维修在线报修功能，支持住户提交报修申请、查看处理进度；实现投诉建议提交与管理员回复流程，完整闭环处理</li>
+        <li><strong>人员信息管理：</strong>管理员端实现住户信息录入、编辑、查询功能，基于MyBatis做多表关联查询，完成社区人员档案的统一管理</li>
+        <li><strong>数据库设计：</strong>独立设计住户表、报修表、投诉表等核心数据表，合理设置字段索引，优化多条件查询效率</li>
+      </ul>
+    </div>
+
+    <!-- 项目2：校园二手交易平台 -->
+    <div class="project-item">
+      <div class="project-header">
+        <div class="project-name">校园二手交易平台（后端开发）</div>
+        <div class="project-tech">Java / Spring Boot / MySQL / ECharts</div>
+      </div>
+      <div class="project-time">2025.03 - 2025.06 | 团队项目</div>
+      <ul class="project-desc">
+        <li><strong>用户模块：</strong>独立设计邮箱注册流程，实现JWT安全认证机制，集成滑动验证码功能，有效防范恶意注册行为</li>
+        <li><strong>核心功能：</strong>实现商品多条件检索功能，支持按标题、分类、价格区间等多维度筛选查询，提升搜索效率</li>
+        <li><strong>数据可视化：</strong>集成ECharts实现平台数据统计图表展示，对接DeepSeek智能客服接口，优化用户交互体验</li>
+      </ul>
+    </div>
+
+    <!-- 项目3：Android校园电商平台 -->
+    <div class="project-item">
+      <div class="project-header">
+        <div class="project-name">Android校园电商平台（移动端开发）</div>
+        <div class="project-tech">Java / Android / SQLite / OkHttp</div>
+      </div>
+      <div class="project-time">2024.10 - 2025.01 | 个人课程设计</div>
+      <ul class="project-desc">
+        <li><strong>账号体系：</strong>实现用户注册登录功能，通过SharedPreferences保存登录状态，实现账号持久化登录</li>
+        <li><strong>商品管理：</strong>开发商家端商品上架、下架、信息编辑功能，操作后实时更新商品列表状态</li>
+        <li><strong>库存查询：</strong>实现商品库存实时查询与统计，库存低于设定值时给出预警提示</li>
+        <li><strong>本地存储：</strong>使用SQLite存储商品基础缓存数据，优化弱网环境下的浏览体验</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 获奖证书板块 -->
+  <section class="section" id="awards">
+    <h2 class="section-title">获奖证书</h2>
+    <div class="awards-list">
+      <div class="award-item">
+        <div class="award-icon">奖</div>
+        <div class="award-text">
+          <h4>国家励志奖学金</h4>
+          <p>专科期间获得，表彰学业成绩与综合表现优秀</p>
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">证</div>
+        <div class="award-text">
+          <h4>大学英语四级证书（CET-4）</h4>
+          <p>具备英语读写能力与技术文档阅读基础</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer>
+    <div class="contact-info">
+      <span>📞 173-3895-1841</span>
+      <span>📧 17338951841@163.com</span>
+      <span>📍 共青团员 | 2003.09</span>
+    </div>
+    <p>© 2026 李文强 个人简历</p>
+  </footer>
+</div>
+
+<script>
+  // 导航平滑滚动与激活状态
+  const navLinks = document.querySelectorAll('.nav-list a');
+  const sections = document.querySelectorAll('.section');
+  const backTop = document.getElementById('backTop');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const targetSection = document.getElementById(targetId);
+
+      window.scrollTo({
+        top: targetSection.offsetTop - 80,
+        behavior: 'smooth'
+      });
+
+      navLinks.forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // 滚动时自动高亮导航 + 回顶按钮显示
+  window.addEventListener('scroll', () => {
+    // 导航高亮
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 90;
+      if (window.scrollY >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+
+    // 回顶按钮显隐
+    if (window.scrollY > 300) {
+      backTop.classList.add('show');
+    } else {
+      backTop.classList.remove('show');
+    }
+  });
+
+  // 点击回顶
+  backTop.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+</script>
+</body>
+</html>
